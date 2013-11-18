@@ -1,4 +1,4 @@
-"""psys installation script."""
+"""pcore installation script."""
 
 from __future__ import unicode_literals
 
@@ -7,12 +7,12 @@ from setuptools import find_packages, setup
 if __name__ == "__main__":
     with open("README") as readme:
         setup(
-            name = "psys",
-            version = "0.2",
+            name = "pcore",
+            version = "0.1",
 
             description = readme.readline().strip(),
             long_description = readme.read().strip() or None,
-            url = "http://github.com/KonishchevDmitry/psys",
+            url = "http://github.com/KonishchevDmitry/pcore",
 
             license = "GPL3",
             author = "Dmitry Konishchev",

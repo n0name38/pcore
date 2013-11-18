@@ -1,6 +1,6 @@
 .PHONY: build install dist rpm_sources srpm rpm pypi clean
 
-PROJECT := psys
+PROJECT := pcore
 PYTHON := python
 RPM_SOURCES_PATH := ~/rpmbuild/SOURCES
 
