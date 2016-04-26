@@ -22,3 +22,9 @@ KILOBYTE = 1024
 
 MEGABYTE = 1024 * KILOBYTE
 """Number of bytes in megabyte."""
+
+GIGABYTE = 1024 * MEGABYTE
+"""Number of bytes in gigabyte."""
+
+TERABYTE = 1024 * GIGABYTE
+"""Number of bytes in terabyte."""
