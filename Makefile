@@ -1,4 +1,4 @@
-.PHONY: build install dist srpm rpm pypi clean
+.PHONY: build install dist sources srpm rpm pypi clean
 
 PYTHON        ?= python
 INSTALL_FLAGS ?=
