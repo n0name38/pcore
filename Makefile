@@ -5,6 +5,7 @@ INSTALL_FLAGS ?=
 
 NAME          := pcore
 RPM_NAME      := python-$(NAME)
+VERSION       := 0.1
 
 build:
 	$(PYTHON) setup.py build
@@ -15,6 +16,10 @@ install:
 dist: clean
 	$(PYTHON) setup.py sdist
 	cp dist/$(NAME)-*.tar.gz .
+
+sources:
+	@git archive --format=tar --prefix="$(NAME)-$(VERSION)/" \
+		$(shell git rev-parse --verify HEAD) | gzip > $(NAME)-$(VERSION).tar.gz
 
 srpm: dist
 	rpmbuild -bs --define "_sourcedir $(CURDIR)" $(RPM_NAME).spec
