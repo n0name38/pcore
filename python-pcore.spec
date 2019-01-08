@@ -1,19 +1,26 @@
-%if 0%{?fedora} > 12 || 0%{?rhel} > 7
+%if 0%{?fedora} > 12 || 0%{?epel} >= 6
 %bcond_without python3
 %else
 %bcond_with python3
 %endif
 
-%if 0%{?rhel} && 0%{?rhel} <= 6
+%if 0%{?epel} >= 7
+%bcond_without python3_other
+%endif
+
+%if 0%{?rhel} <= 6
 %{!?__python2: %global __python2 /usr/bin/python2}
 %{!?python2_sitelib: %global python2_sitelib %(%{__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 %endif
 %if 0%{with python3}
 %{!?__python3: %global __python3 /usr/bin/python3}
 %{!?python3_sitelib: %global python3_sitelib %(%{__python3} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
+%{!?python3_pkgversion: %global python3_pkgversion 3}
 %endif  # with python3
 
-%define project_name pcore
+%global project_name pcore
+%global project_description %{expand:
+A Python package that provides various core tools}
 
 Name:    python-%project_name
 Version: 0.2
@@ -27,21 +34,28 @@ Source:  http://pypi.python.org/packages/source/p/%project_name/%project_name-%{
 
 BuildArch:     noarch
 BuildRequires: python2-devel python-setuptools
-%if 0%{with python3}
-BuildRequires: python3-devel python3-setuptools
-%endif  # with python3
 
-%description
-A Python package that provides various core tools
+%description %{project_description}
 
 
 %if 0%{with python3}
-%package -n python3-%project_name
-Summary: A Python package that provides various core tools
+%package -n python%{python3_pkgversion}-%project_name
+Summary: %{summary}
+BuildRequires: python%{python3_pkgversion}-devel
+BuildRequires: python%{python3_pkgversion}-setuptools
 
-%description -n python3-%project_name
-A Python package that provides various core tools
+%description -n python%{python3_pkgversion}-%project_name %{project_description}
 %endif  # with python3
+
+
+%if 0%{with python3_other}
+%package -n python%{python3_other_pkgversion}-%project_name
+Summary: %{summary}
+BuildRequires: python%{python3_other_pkgversion}-devel
+BuildRequires: python%{python3_other_pkgversion}-setuptools
+
+%description -n python%{python3_other_pkgversion}-%project_name %{project_description}
+%endif  # with python3_other
 
 
 %prep
@@ -53,6 +67,9 @@ make PYTHON=%{__python2}
 %if 0%{with python3}
 make PYTHON=%{__python3}
 %endif  # with python3
+%if 0%{with python3_other}
+make PYTHON=%{__python3_other}
+%endif  # with python3_other
 
 
 %install
@@ -62,6 +79,9 @@ make PYTHON=%{__python2} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 %if 0%{with python3}
 make PYTHON=%{__python3} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 %endif  # with python3
+%if 0%{with python3_other}
+make PYTHON=%{__python3_other} INSTALL_FLAGS="-O1 --root '%buildroot'" install
+%endif  # with python3_other
 
 
 %files
@@ -71,12 +91,20 @@ make PYTHON=%{__python3} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 %doc ChangeLog README INSTALL
 
 %if 0%{with python3}
-%files -n python3-%project_name
+%files -n python%{python3_pkgversion}-%project_name
 %defattr(-,root,root,-)
 %{python3_sitelib}/pcore
 %{python3_sitelib}/pcore-*.egg-info
 %doc ChangeLog README INSTALL
 %endif  # with python3
+
+%if 0%{with python3_other}
+%files -n python%{python3_other_pkgversion}-%project_name
+%defattr(-,root,root,-)
+%{python3_other_sitelib}/pcore
+%{python3_other_sitelib}/pcore-*.egg-info
+%doc ChangeLog README INSTALL
+%endif  # with python3_other
 
 
 %clean
