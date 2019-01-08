@@ -16,7 +16,7 @@
 %define project_name pcore
 
 Name:    python-%project_name
-Version: 0.1
+Version: 0.2
 Release: 1%{?dist}
 Summary: A Python package that provides various core tools
 
