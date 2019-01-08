@@ -84,5 +84,8 @@ make PYTHON=%{__python3} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 
 
 %changelog
+* Tue Apr 26 2016 Dmitry Konishchev <konishchev@gmail.com> - 0.2-1
+- Add GIGABYTE and TERABYTE constants
+
 * Mon Nov 18 2013 Dmitry Konishchev <konishchev@gmail.com> - 0.1-1
 - New package
