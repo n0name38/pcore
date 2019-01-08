@@ -24,7 +24,7 @@ A Python package that provides various core tools}
 
 Name:    python-%project_name
 Version: 0.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A Python package that provides various core tools
 
 Group:   Development/Languages
@@ -112,6 +112,9 @@ make PYTHON=%{__python3_other} INSTALL_FLAGS="-O1 --root '%buildroot'" install
 
 
 %changelog
+* Wed Jan 09 2019 Dmitry Konishchev <konishchev@gmail.com> - 0.2-2
+- Add python3 package build for EPEL
+
 * Tue Apr 26 2016 Dmitry Konishchev <konishchev@gmail.com> - 0.2-1
 - Add GIGABYTE and TERABYTE constants
 
