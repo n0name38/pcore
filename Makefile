@@ -5,7 +5,7 @@ INSTALL_FLAGS ?=
 
 NAME          := pcore
 RPM_NAME      := python-$(NAME)
-VERSION       := 0.1
+VERSION       := $(shell sed -n s/[[:space:]]*Version:[[:space:]]*//p $(RPM_NAME).spec)
 
 build:
 	$(PYTHON) setup.py build
