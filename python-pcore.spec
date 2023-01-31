@@ -4,7 +4,7 @@ A Python package that provides various core tools}
 
 Name:    python-%project_name
 Version: 0.2
-Release: 3.CROC1%{?dist}
+Release: 3.CROC3%{?dist}
 Summary: A Python package that provides various core tools
 
 Group:   Development/Languages
@@ -21,6 +21,8 @@ BuildArch:     noarch
 Summary: %{summary}
 BuildRequires: python%{python3_pkgversion}-devel
 BuildRequires: python%{python3_pkgversion}-setuptools
+Obsoletes: python36-%project_name
+Conflicts: python36-%project_name
 
 %description -n python%{python3_pkgversion}-%project_name %{project_description}
 
