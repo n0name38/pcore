@@ -4,7 +4,7 @@ A Python package that provides various core tools}
 
 Name:    python-%project_name
 Version: 0.2
-Release: 3.CROC3%{?dist}
+Release: 3.CROC3_REDOS_TEST1%{?dist}
 Summary: A Python package that provides various core tools
 
 Group:   Development/Languages
